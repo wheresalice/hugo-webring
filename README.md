@@ -15,7 +15,7 @@ Inspired by [webring-starter](https://github.com/krusynth/webring-starter)
 ## Tools Used
 
 - Alice's fork of [Openring](https://github.com/wheresalice/openring)
-- Alice's fork of [hugo-theme-readable](https://github.com/wheresalice/hugo-theme-readable)
+- [hugo-theme-readable](https://github.com/cjtheham/hugo-theme-readable)
 - GitHub Actions
 - GitHub Pages
 - Hugo
