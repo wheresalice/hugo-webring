@@ -1,0 +1,44 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Set a branch to deploy
+#  schedule:
+#    - cron: '7 */6 * * *' # At minute 7 past every 6th hour.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.110.0'
+          # extended: true
+
+      - name: Fetch RSS
+        run: go install github.com/wheresalice/openring@latest && openring static/sites.json < resources/in.html > layouts/partials/webring.html
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+            # cname: webring.example.com # uncomment to set a CNAME for the website

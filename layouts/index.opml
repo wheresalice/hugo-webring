@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head>
+    <title>{{ .Site.Title }} Feeds</title>
+  </head>
+  <body>
+{{- range $s := getJSON "static/sites.json" -}}
+      {{- if $s.rss -}}
+      <outline text="{{ $s.name }}" title="{{ $s.name }}" type="rss" xmlUrl="{{ $s.rss }}" htmlUrl="{{ $s.url }}"/>
+      {{- end -}}
+{{- end -}}
+  </body>
+</opml>

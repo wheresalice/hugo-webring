@@ -1,0 +1,31 @@
+theme: 'readable'
+title: 'My Webring'
+baseURL: 'https://webring.example.com'
+
+languages:
+  en:
+    languageName: English
+    menu:
+      main:
+      - name: Home
+        url: /
+        weight: 1
+      - name: Sites
+        url: /sites
+        weight: 10
+      - name: Join
+        url: /join
+        weight: 20
+
+mediaTypes:
+  text/opml:
+    suffixes:
+    - opml
+outputTypes:
+  opml:
+    mediaType: text/opml
+
+outputFormats:
+  opml:
+    isPlainText: true
+    mediaType: text/opml
